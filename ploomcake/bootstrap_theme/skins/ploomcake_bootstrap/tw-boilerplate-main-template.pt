@@ -1,0 +1,73 @@
+<metal:page define-macro="bootstrap_master"
+            tal:define="portal_state context/@@plone_portal_state;
+                context_state context/@@plone_context_state;
+                plone_view context/@@plone;
+                lang portal_state/language;
+                view nocall:view | nocall: plone_view;
+                dummy python: plone_view.mark_view(view);
+                portal_url portal_state/portal_url;
+                checkPermission nocall: context/portal_membership/checkPermission;
+                site_properties context/portal_properties/site_properties;
+                base_site_url site_properties/base_site_url|string:landing.redomino.com">
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <div tal:replace="structure provider:plone.htmlhead" />
+        <tal:css-block metal:define-slot="bootstrap-css-slot">
+            <link tal:attributes="href string:$portal_url/css/bootstrap.css" rel="stylesheet" media="screen">
+            <link tal:attributes="href string:$portal_url/css/bootstrap-theme.css" rel="stylesheet" >
+            <link tal:attributes="href string:$portal_url/css/font-awesome.css" rel="stylesheet" >
+        </tal:css-block>
+
+        <tal:css-block metal:define-slot="extra-css-slot"></tal:css-block>
+
+        <script tal:attributes="src string:$portal_url/js/modernizr-2.6.2.min.js"></script>
+
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320"/>
+           
+        <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
+        <meta http-equiv="cleartype" content="on" />
+        <!-- more tags for your 'head' to consider https://gist.github.com/849231 -->
+
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    </head>
+
+
+
+    <body tal:define="isRTL portal_state/is_rtl;
+                      body_class python:plone_view.bodyClass(template, view);"
+          tal:attributes="class body_class;
+                          dir python:isRTL and 'rtl' or 'ltr'">
+
+      <tal:block metal:define-slot="header">
+      </tal:block>
+
+      <tal:block metal:define-slot="main">
+      </tal:block>
+
+      <tal:block metal:define-slot="footer">
+      </tal:block>
+
+      <tal:block metal:define-slot="colophon">
+      </tal:block>
+
+      <tal:block metal:define-slot="javascript-slot">
+          <script tal:attributes="src string:$portal_url/js/jquery-1.9.1.min.js"></script>
+          <script tal:attributes="src string:$portal_url/js/bootstrap.js"></script>
+      </tal:block>
+
+      <tal:js-block metal:define-slot="extra-js-slot">
+      </tal:js-block>
+
+      <tal:js-block metal:define-slot="analytics-slot">
+      </tal:js-block>
+    </body>
+</html>
+</metal:page>

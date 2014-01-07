@@ -1,0 +1,114 @@
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" metal:use-macro="context/tw-boilerplate-main-template/macros/bootstrap_master"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" metal:use-macro="context/tw-boilerplate-main-template/macros/bootstrap_master"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" metal:use-macro="context/tw-boilerplate-main-template/macros/bootstrap_master"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" metal:use-macro="context/tw-boilerplate-main-template/macros/bootstrap_master"> <!--<![endif]-->
+
+    <tal:block metal:fill-slot="extra-css-slot" >
+        <link tal:attributes="href string:${here/landing.css/absolute_url}" rel="stylesheet" >
+    </tal:block>
+
+    <body>
+
+      <tal:block metal:fill-slot="header">
+      <div class="row-fluid header">
+          <div class="container">
+              <img tal:attributes="alt here/Title; src string:${here/logo/absolute_url}/image" />
+          </div>
+<style>
+.sub-header {
+    background: #fff;
+    border-bottom: 8px solid #EE7E01;
+    margin-bottom: 30px;
+}
+
+#content-core {
+    font: 18px/24px 'Helvetica Neue', Helvetica, Arial;
+}
+
+#content-core a {
+background: #F07D00;
+color: #fff;
+font-size: 26px;
+border: 3px solid #fff;
+border-radius: 12px;
+box-shadow: 0px 1px 3px 1px #ccc;
+padding: 10px;
+font-family: Trebuchet MS;
+margin: 15px 0;
+display: inline-block;
+text-decoration: none;
+}
+
+.total {
+    color: #F07D00;
+    font-size: 20px;
+}
+
+
+</style>
+      </div>
+      </tal:block>
+<div class="main-content" metal:fill-slot="main">
+
+<div class="sub-header row-fluid">
+<div class="container">
+<h2 tal:content="here/Title" style="text-transform: uppercase; ">title</h2>
+<h4><span tal:replace="here/Description|nothing" /> 
+    <span tal:define="total request/total|nothing"
+          tal:condition="total"
+          class="total"
+          tal:content="string:$total €" >total</span>
+</h4>
+</div>
+</div>
+
+<div class="row-fluid">
+   <div class="container" id="content-core">
+        <metal:field use-macro="python:context.widget('text', mode='view')">
+            Body text
+        </metal:field>
+</div></div>
+
+</div>
+      <tal:block metal:fill-slot="footer"
+                 tal:define="footertext nocall:context/footer-text|nothing">
+      <div class="footer" tal:condition="footertext">
+        <div class="container">
+            <div tal:content="structure footertext/getText|nothing" />
+        </div>
+      </div>
+      </tal:block>
+
+      <tal:block metal:fill-slot="colophon"
+                 tal:define="colophontext nocall:context/colophon-text|nothing">
+      <div class="colophon" tal:condition="colophontext">
+        <div class="container">
+            <div tal:content="structure colophontext/getText|nothing" />
+        </div>
+      </div>
+      </tal:block>
+
+      <tal:js-block metal:fill-slot="extra-js-slot">
+<script src="jquery.responsiveiframe.js"></script>
+<script>
+;(function($){
+    $(function(){
+       $('iframe').responsiveIframe({ xdomain: '*'});
+    });
+})(jQuery);
+</script>
+
+      </tal:js-block>
+
+      <tal:block metal:fill-slot="analytics-slot"
+                 tal:define="analyticscode nocall:context/analytics-code|nothing">
+          <div class="analytics" tal:condition="analyticscode">
+              <div class="container">
+                  <div tal:content="structure analyticscode/getText|nothing" />
+              </div>
+          </div>
+      </tal:block>
+
+
+</body>
+</html>

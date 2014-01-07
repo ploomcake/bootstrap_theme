@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="ploomcake.bootstrap">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Ploomcake bootstrap"
+      directory="profiles/default"
+      description='Extension profile for the "Ploomcake bootstrap" Plone theme.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="ploomcake.bootstrap.various"
+      title="Ploomcake bootstrap: miscellaneous import steps"
+      description="Various import steps that are not handled by GS import/export handlers."
+      handler="ploomcake.bootstrap.setuphandlers.setupVarious">
+    <depends name="skins"/>
+  </genericsetup:importStep>
+
+</configure>

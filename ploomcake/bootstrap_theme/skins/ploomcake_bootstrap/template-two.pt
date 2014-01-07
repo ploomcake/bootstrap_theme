@@ -1,0 +1,102 @@
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" metal:use-macro="context/tw-boilerplate-main-template/macros/bootstrap_master"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" metal:use-macro="context/tw-boilerplate-main-template/macros/bootstrap_master"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" metal:use-macro="context/tw-boilerplate-main-template/macros/bootstrap_master"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" metal:use-macro="context/tw-boilerplate-main-template/macros/bootstrap_master"> <!--<![endif]-->
+
+    <tal:block metal:fill-slot="extra-css-slot" >
+        <link tal:attributes="href string:${here/landing.css/absolute_url}" rel="stylesheet" >
+    </tal:block>
+
+    <body>
+   
+      <tal:block metal:fill-slot="header">
+      <div class="row-fluid header">
+          <div class="container"><div class="span6">
+		<h1>Il tuo pieno è prezioso!</h1>
+          </div></div>
+      </div>
+      </tal:block>
+
+      <div class="main-content" metal:fill-slot="main" 
+                      tal:define="landing-title context/Title;
+                      page1 nocall:context/page1|nothing;
+                      page2 nocall:context/page2|nothing;
+                      form nocall:context/form|nothing;
+                      formbottom nocall:context/form-bottom|nothing;">
+      
+      <div class="row-fluid page first-page" tal:condition="page1">
+          <div class="container" >
+              <div class="span6 left-content">
+                  <div tal:content="structure page1/getText|nothing" />
+              </div>
+              <div class="span6 form-embed embed-top">
+                  <iframe height="595"
+                          width="410" 
+                          frameborder="0"
+                          allowTransparency="true"
+                          scrolling="no" 
+                          tal:condition="form"
+                          tal:attributes="src string:${form/absolute_url}?ajax_load=0&ajax_include_head=1&utm_source=newsletter&utm_medium=email&utm_campaign=Demo+Kockon" seamless></iframe>
+              </div>
+          </div>
+      </div>
+
+          <div class="row-fluid middle-separator" tal:condition="page2">
+              <div class="container" >
+                  <div class="span12">
+                      <h1 tal:content="page2/Title"></h1>
+                  </div>
+              </div>
+          </div> 
+<!--
+      <div class="row-fluid page second-page" tal:condition="page2">
+          <div class="container" >
+              <div class="row-fluid right-content">
+                  <div tal:content="structure page2/getText|nothing" />
+              </div>
+              <div class="row-fluid form-embed embed-bottom">
+          <iframe height="215"
+                  width="100%"
+                  frameborder="0"
+                  scrolling="no" 
+                  allowTransparency="true"
+                  tal:condition="form"
+                 tal:attributes="src string:${formbottom/absolute_url}?ajax_load=0&ajax_include_head=1&bottom=1" seamless></iframe>
+              </div>
+          </div>
+      </div>
+      </div>
+-->
+      <tal:block metal:fill-slot="footer"
+                 tal:define="footertext nocall:context/footer-text|nothing">
+          <div class="footer" tal:condition="footertext">
+              <div class="container">
+                  <div tal:content="structure footertext/getText|nothing" />
+              </div>
+          </div>
+      </tal:block>
+
+      <tal:block metal:fill-slot="colophon"
+                 tal:define="colophontext nocall:context/colophon-text|nothing">
+          <div class="colophon" tal:condition="colophontext">
+              <div class="container">
+                  <div tal:content="structure colophontext/getText|nothing" />
+              </div>
+          </div>
+      </tal:block>
+
+      <tal:block metal:fill-slot="javascript-slot">
+      </tal:block>
+
+      <tal:block metal:fill-slot="analytics-slot"
+                 tal:define="analyticscode nocall:context/analytics-code|nothing">
+          <div class="analytics" tal:condition="analyticscode">
+              <div class="container">
+                  <div tal:content="structure analyticscode/getText|nothing" />
+              </div>
+          </div>
+      </tal:block>
+
+
+    </body>
+</html>

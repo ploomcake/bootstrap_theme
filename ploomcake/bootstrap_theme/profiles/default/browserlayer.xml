@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<layers>
+  <layer
+     name="ploomcake_bootstrap"
+     interface="ploomcake.bootstrap.browser.interfaces.IBootstrapThemeSpecific"
+     />
+  <layer
+     name="sidebar_theme"
+     interface="ploomcake.bootstrap.browser.interfaces.ISidebarTheme"
+     />
+</layers>

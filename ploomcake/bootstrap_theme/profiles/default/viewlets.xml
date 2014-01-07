@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object>
+ <hidden manager="plone.belowcontent" skinname="Sidebar Theme">
+      <viewlet name="plone.belowcontenttitle.keywords"/>
+ </hidden>
+</object>
